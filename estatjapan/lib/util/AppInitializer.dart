@@ -17,7 +17,7 @@ import 'Application.dart';
 /// アプリの初期化を管理する
 ///
 class AppInitializer {
-  static FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics();
+  static FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.instance;
   bool isRestart = false;
 
   /// コンストラクタ

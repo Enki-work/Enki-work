@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'dart:io' show Platform;
 
 class AppOpenAdManager {
   /// Maximum duration allowed between loading and showing the ad.
@@ -26,7 +26,6 @@ class AppOpenAdManager {
         Platform.isAndroid ? json['android_open_ads'] : json['ios_open_ads'];
     AppOpenAd.load(
       adUnitId: adUnitId,
-      orientation: AppOpenAd.orientationPortrait,
       request: const AdRequest(),
       adLoadCallback: AppOpenAdLoadCallback(
         onAdLoaded: (ad) {

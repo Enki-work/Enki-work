@@ -19,6 +19,58 @@ class _WebViewPageState extends State<WebViewPage> {
       Navigator.of(context).pop();
       return const SizedBox();
     }
+
+    _webViewController = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            // Update loading bar.
+          },
+          onPageStarted: (String url) {},
+          onPageFinished: (String url) {
+            // final js = 'function removeDummy() {'
+            //     'var elem = document.getElementById("wrapper");'
+            //     'var childs = elem.childnodes;'
+            //     // 'Array.prototype.forEach.call(childs, function(child) {'
+            //     // 'child.parentElement.removeChild(child);'
+            //     // '});'
+            //     // 'var a1 = document.getElementsByClassName("titlePage");'
+            //     // 'a1.parentElement.removeChild(a1);'
+            //
+            //     //
+            //     // 'var eee = document.getElementsByClassName("textBlock honbun");'
+            //     // 'Array.prototype.forEach.call(eee, function(child) {'
+            //     // 'child.parentElement.removeChild(child);'
+            //     // '});'
+            //
+            //     'var eee = document.getElementById("contentsArea");'
+            //     'Array.prototype.forEach.call(eee.children, function(child) {'
+            //     'Array.prototype.forEach.call(child.children, function(childi) {'
+            //     'childi.parentElement.removeChild(childi);'
+            //     '});'
+            //     '});'
+            //
+            //     // 'var eee = document.getElementById("contentsArea"); eee.parentElement.removeChild(eee);'
+            //     '}removeDummy();';
+            _webViewController!
+                .runJavaScriptReturningResult(("document.title"))
+                .then((value) {
+              if (_title.isEmpty) {
+                setState(() {
+                  if (value is String) {
+                    _title = value;
+                  }
+                });
+              }
+            });
+          },
+          onHttpError: (HttpResponseError error) {},
+          onWebResourceError: (WebResourceError error) {},
+        ),
+      )
+      ..loadRequest(Uri.parse(widget.loadUrl ?? ''));
+
     return Scaffold(
         appBar: AppBar(
           //导航栏
@@ -31,43 +83,7 @@ class _WebViewPageState extends State<WebViewPage> {
           ],
         ),
         extendBodyBehindAppBar: true,
-        body: WebView(
-            initialUrl: widget.loadUrl,
-            javascriptMode: JavascriptMode.unrestricted,
-            onWebViewCreated: (WebViewController webViewController) {
-              _webViewController = webViewController;
-            },
-            onPageFinished: (String url) {
-              // final js = 'function removeDummy() {'
-              //     'var elem = document.getElementById("wrapper");'
-              //     'var childs = elem.childnodes;'
-              //     // 'Array.prototype.forEach.call(childs, function(child) {'
-              //     // 'child.parentElement.removeChild(child);'
-              //     // '});'
-              //     // 'var a1 = document.getElementsByClassName("titlePage");'
-              //     // 'a1.parentElement.removeChild(a1);'
-              //
-              //     //
-              //     // 'var eee = document.getElementsByClassName("textBlock honbun");'
-              //     // 'Array.prototype.forEach.call(eee, function(child) {'
-              //     // 'child.parentElement.removeChild(child);'
-              //     // '});'
-              //
-              //     'var eee = document.getElementById("contentsArea");'
-              //     'Array.prototype.forEach.call(eee.children, function(child) {'
-              //     'Array.prototype.forEach.call(child.children, function(childi) {'
-              //     'childi.parentElement.removeChild(childi);'
-              //     '});'
-              //     '});'
-              //
-              //     // 'var eee = document.getElementById("contentsArea"); eee.parentElement.removeChild(eee);'
-              //     '}removeDummy();';
-              _webViewController!
-                  .runJavascriptReturningResult(("document.title"))
-                  .then((value) => setState(() {
-                        _title = value;
-                      }));
-            }));
+        body: WebViewWidget(controller: _webViewController!));
   }
 }
 
