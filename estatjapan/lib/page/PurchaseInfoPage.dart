@@ -260,6 +260,7 @@ class _PurchaseInfoPageState extends State<PurchaseInfoPage> {
                                   style: TextStyle(fontSize: 13),
                                 ),
                               ])))),
+              const SizedBox(height: 12),
               ElevatedButton.icon(
                 style: ButtonStyle(
                     fixedSize: MaterialStateProperty.all(
@@ -274,8 +275,15 @@ class _PurchaseInfoPageState extends State<PurchaseInfoPage> {
               const SizedBox(height: 12),
               Consumer<PurchaseState>(
                 builder: (BuildContext context, value, Widget? child) {
-                  return Text(
-                      "無料期間終了後${value.adDeletedSubscriptionDetail?.price}/月");
+                  return Column(
+                    children: [
+                      const Text('無料試用期間: 30日間'),
+                      Text(
+                          '無料試用期間終了後の料金: ${value.adDeletedSubscriptionDetail?.price}/月'),
+                      const Text('有料定期購入への移行時期: 無料試用期間終了後'),
+                      const Text('解約方法: 設定画面からいつでも解約可能'),
+                    ],
+                  );
                 },
               ),
             ],
