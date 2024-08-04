@@ -48,7 +48,7 @@ class ContactMePage extends StatelessWidget {
                         final info = await PackageInfo.fromPlatform();
                         final Uri emailLaunchUri = Uri(
                           scheme: 'mailto',
-                          path: 'daqige2333@example.com',
+                          path: 'daqige2333@gmail.com',
                           query: encodeQueryParameters(<String, String>{
                             'subject': '${info.appName}_V${info.version}'
                           }),
