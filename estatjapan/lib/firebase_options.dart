@@ -54,20 +54,20 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCYUzCNCesAaUcG8N9dUuY9HIEBncp_LUA',
-    appId: '1:327810721125:android:d252af54007f800cf3ad8c',
-    messagingSenderId: '327810721125',
-    projectId: 'estatjapan-e3be3',
-    storageBucket: 'estatjapan-e3be3.appspot.com',
+    apiKey: 'AIzaSyCDfor1WJtPJ8WXUg9UWNZd5EO7EHY94Iw',
+    appId: '1:569212364150:android:4eff6beed32a316aa70657',
+    messagingSenderId: '569212364150',
+    projectId: 'estatjapan-4a8ac',
+    storageBucket: 'estatjapan-4a8ac.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBlgS9aJLefDL3-NoK9MOXZV2sc_TVvVho',
-    appId: '1:327810721125:ios:6c91c3a4197241fdf3ad8c',
-    messagingSenderId: '327810721125',
-    projectId: 'estatjapan-e3be3',
-    storageBucket: 'estatjapan-e3be3.appspot.com',
-    iosClientId: '327810721125-v8peg5tpmfdft90j7e4rucaj4clrv3ak.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBoWTFuLlwUaaFSjduzcGpWz1Zx1xx4Ras',
+    appId: '1:569212364150:ios:61e43ce6802185d3a70657',
+    messagingSenderId: '569212364150',
+    projectId: 'estatjapan-4a8ac',
+    storageBucket: 'estatjapan-4a8ac.appspot.com',
+    iosClientId: '569212364150-ugocfgvoi2esplaqkbh67h4nhgkus3q9.apps.googleusercontent.com',
     iosBundleId: 'com.estatjapan',
   );
 
