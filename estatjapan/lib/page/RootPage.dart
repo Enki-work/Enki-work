@@ -75,8 +75,10 @@ class RootPage extends StatelessWidget {
                 icon: Icon(Icons.add_chart_rounded), label: '在留資格審査'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.align_horizontal_left_rounded), label: 'グラフ'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.all_inbox_rounded), label: 'ビザに関する情報'),
+            //　審査通れないのでコメントアウト
+            // https://play.google.com/console/u/0/policy-emails/developers/8555153811676652561?id=4980033980793107208&id=4980239439883718177
+            // BottomNavigationBarItem(
+            //     icon: Icon(Icons.all_inbox_rounded), label: 'ビザに関する情報'),
           ],
           currentIndex: context.watch<RepositoryDataState>().selectedIndex,
           onTap: (index) =>
