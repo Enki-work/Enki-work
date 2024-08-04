@@ -1,7 +1,5 @@
 import 'package:estatjapan/model/state_notifier/AppConfigNotifier.dart';
-
 import 'package:firebase_analytics/observer.dart';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +17,6 @@ import '../model/state_notifier/APIRepositoryNotifier.dart';
 import '../model/state_notifier/PurchaseNotifier.dart';
 import '../page/ContactMePage.dart';
 import '../page/EStatInfoPage.dart';
-import '../page/LicenseInfoPage.dart';
 import '../page/MonthSelectPage.dart';
 import '../page/PurchaseInfoPage.dart';
 import '../page/RootPage.dart';
@@ -98,6 +95,9 @@ class _ApplicationState extends State<Application> with WidgetsBindingObserver {
         break;
       case AppLifecycleState.resumed:
         break;
+      case AppLifecycleState.hidden:
+        // TODO: Handle this case.
+        break;
     }
   }
 
@@ -160,7 +160,6 @@ class MyHomePage extends StatelessWidget {
             );
           }
         },
-        "LicenseInfoPage": (context) => const LicenseInfoPage(),
         "eStaInfoPage": (context) => const EStaInfoPage(),
         "ContactMePage": (context) => const ContactMePage(),
         "WebViewPage": (context) {

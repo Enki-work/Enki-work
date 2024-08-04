@@ -124,9 +124,16 @@ class _MenuDrawerState extends State<MenuDrawer> {
                       ListTile(
                         leading: const Icon(Icons.archive_rounded),
                         title: const Text('ライセンス情報'),
-                        onTap: () {
+                        onTap: () async {
                           Navigator.pop(context);
-                          Navigator.of(context).pushNamed("LicenseInfoPage");
+                          final packageInfo = await PackageInfo.fromPlatform();
+                          if (context.mounted) {
+                            showLicensePage(
+                              context: context,
+                              applicationName: packageInfo.appName,
+                              applicationVersion: packageInfo.version,
+                            );
+                          }
                         },
                       ),
                       ListTile(
