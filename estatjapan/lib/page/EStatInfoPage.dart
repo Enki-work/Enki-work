@@ -1,3 +1,5 @@
+import 'package:estatjapan/util/UIUnti.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -27,6 +29,35 @@ class EStaInfoPage extends StatelessWidget {
                   "このサービスは、政府統計総合窓口(e-Stat)のAPI機能を使用していますが、サービスの内容は国によって保証されたものではありません。",
                   style: TextStyle(
                     fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: const Text(
+                    "e-Statとは",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                RichText(
+                  text: TextSpan(
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'https://www.youtube.com/watch?v=39NW-vGtA5k',
+                        style: const TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            launchURL(context,
+                                "https://www.youtube.com/watch?v=39NW-vGtA5k");
+                          },
+                      ),
+                    ],
                   ),
                 ),
               ],
