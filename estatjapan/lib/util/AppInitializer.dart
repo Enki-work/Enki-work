@@ -33,7 +33,11 @@ class AppInitializer {
 
   /// アプリのスタート
   void run() {
+    // エラーを致命的に設定
+    BindingBase.debugZoneErrorsAreFatal = true;
+
     runZonedGuarded<Future<void>>(() async {
+      WidgetsFlutterBinding.ensureInitialized();
       initialize().then((app) {
         runApp(
           GetMaterialApp(
