@@ -42,8 +42,11 @@ class BannerAdModel extends ChangeNotifier {
         },
       ),
     );
-
-    _bannerAd?.load();
+    try {
+      _bannerAd?.load();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   @override

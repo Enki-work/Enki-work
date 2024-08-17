@@ -2,9 +2,11 @@ import 'package:estatjapan/model/state/AppConfigState.dart';
 import 'package:estatjapan/model/state/PurchaseState.dart';
 import 'package:estatjapan/model/state/RepositoryDataState.dart';
 import 'package:estatjapan/model/state_notifier/APIRepositoryNotifier.dart';
+import 'package:estatjapan/util/SharedPreferencesUtil.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'GraphDataSelectPage.dart';
 import 'ImmigrationStatisticsTypeSelectPage.dart';
@@ -58,6 +60,17 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SharedPreferencesUtil.getBool('isShowedPrivacyPolicyDialog')
+        .then((isShowedPrivacyPolicyDialog) async {
+      if (isShowedPrivacyPolicyDialog != true) {
+        await SharedPreferencesUtil.setBool(
+            'isShowedPrivacyPolicyDialog', true);
+        if (context.mounted) {
+          showPrivacyPolicyDialog(context);
+        }
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -85,6 +98,50 @@ class RootPage extends StatelessWidget {
               context.read<APIRepositoryNotifier>().selectedIndex = index,
         );
       }),
+    );
+  }
+
+  void showPrivacyPolicyDialog(BuildContext pcontext) {
+    showDialog(
+      context: pcontext,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('情報について'),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text(
+                    'このアプリで提供される政府関連の情報は、日本の政府統計ポータルサイト「e-Stat」から取得したものです。'
+                    'データはe-Statの利用規約に基づいて公開されています。'
+                    '詳細については、e-Statの利用規約をご参照ください。'),
+                const SizedBox(height: 10),
+                GestureDetector(
+                  onTap: () async {
+                    const url = 'https://www.e-stat.go.jp/terms-of-use';
+                    launchUrl(Uri.parse(url));
+                  },
+                  child: const Text(
+                    'e-Stat 利用規約',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+              },
+              child: const Text('閉じる'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -24,24 +24,28 @@ class AppOpenAdManager {
     final json = jsonDecode(contents);
     final adUnitId =
         Platform.isAndroid ? json['android_open_ads'] : json['ios_open_ads'];
-    AppOpenAd.load(
-      adUnitId: adUnitId,
-      request: const AdRequest(),
-      adLoadCallback: AppOpenAdLoadCallback(
-        onAdLoaded: (ad) {
-          if (kDebugMode) {
-            print('$ad loaded');
-          }
-          _appOpenLoadTime = DateTime.now();
-          _appOpenAd = ad;
-        },
-        onAdFailedToLoad: (error) {
-          if (kDebugMode) {
-            print('AppOpenAd failed to load: $error');
-          }
-        },
-      ),
-    );
+    try {
+      AppOpenAd.load(
+        adUnitId: adUnitId,
+        request: const AdRequest(),
+        adLoadCallback: AppOpenAdLoadCallback(
+          onAdLoaded: (ad) {
+            if (kDebugMode) {
+              print('$ad loaded');
+            }
+            _appOpenLoadTime = DateTime.now();
+            _appOpenAd = ad;
+          },
+          onAdFailedToLoad: (error) {
+            if (kDebugMode) {
+              print('AppOpenAd failed to load: $error');
+            }
+          },
+        ),
+      );
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   /// Whether an ad is available to be shown.
