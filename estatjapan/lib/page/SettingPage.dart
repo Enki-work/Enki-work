@@ -1,10 +1,9 @@
+import 'package:estatjapan/model/state/AppConfigState.dart';
 import 'package:estatjapan/model/state_notifier/AppConfigNotifier.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-
-import '../model/state/AppConfigState.dart';
 
 enum SettingPageItemType { themeDarkMode, themeColorSetting }
 
@@ -43,10 +42,10 @@ class _SettingPageState extends State<SettingPage> {
                 int index = bAdModel.isAdLoaded() ? oIndex - 1 : oIndex;
                 if (oIndex == 0 && bAdModel.isAdLoaded()) {
                   return Container(
-                    child: AdWidget(ad: bAdModel.bannerAd()),
                     width: bAdModel.bannerAd().size.width.toDouble(),
                     height: 72.0,
                     alignment: Alignment.center,
+                    child: AdWidget(ad: bAdModel.bannerAd()),
                   );
                 }
                 final itemType = listItemTitles[index];
@@ -140,26 +139,23 @@ class _SettingPageState extends State<SettingPage> {
           title: Text("テーマカラー設定",
               style: TextStyle(fontSize: 12, color: Colors.grey)),
         ),
-        ...FlexScheme.values
-            .map(
-              (e) => RadioListTile(
-                secondary: Icon(
-                  Icons.color_lens,
-                  color: FlexThemeData.light(scheme: e).primaryColorLight,
-                ),
-                title: Text(e.name),
-                value: e.name,
-                groupValue:
-                    context.watch<AppConfigState>().themeFlexScheme.name,
-                onChanged: (String? value) => context
-                    .read<AppConfigNotifier>()
-                    .themeFlexSchemeName = value ?? '',
-                selected: e.name ==
-                    context.watch<AppConfigState>().themeFlexScheme.name,
-                controlAffinity: ListTileControlAffinity.trailing,
-              ),
-            )
-            .toList(),
+        ...FlexScheme.values.map(
+          (e) => RadioListTile(
+            secondary: Icon(
+              Icons.color_lens,
+              color: FlexThemeData.light(scheme: e).primaryColorLight,
+            ),
+            title: Text(e.name),
+            value: e.name,
+            groupValue: context.watch<AppConfigState>().themeFlexScheme.name,
+            onChanged: (String? value) => context
+                .read<AppConfigNotifier>()
+                .themeFlexSchemeName = value ?? '',
+            selected:
+                e.name == context.watch<AppConfigState>().themeFlexScheme.name,
+            controlAffinity: ListTileControlAffinity.trailing,
+          ),
+        ),
         const SizedBox(
           height: 8,
         ),

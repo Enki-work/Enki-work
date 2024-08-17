@@ -1,11 +1,10 @@
 import 'dart:io';
 
+import 'package:estatjapan/model/state/PurchaseState.dart';
+import 'package:estatjapan/model/state_notifier/PurchaseNotifier.dart';
+import 'package:estatjapan/util/UIUnti.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../model/state/PurchaseState.dart';
-import '../model/state_notifier/PurchaseNotifier.dart';
-import '../util/UIUnti.dart';
 
 class PurchaseInfoPage extends StatefulWidget {
   const PurchaseInfoPage({Key? key}) : super(key: key);
@@ -62,11 +61,11 @@ class _PurchaseInfoPageState extends State<PurchaseInfoPage> {
                               children: [
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width - 46,
-                                  child: Card(
+                                  child: const Card(
                                     child: Padding(
-                                        padding: const EdgeInsets.only(
+                                        padding: EdgeInsets.only(
                                             top: 16, bottom: 16),
-                                        child: Column(children: const [
+                                        child: Column(children: [
                                           Text(
                                             "広告削除プランの機能",
                                             style: TextStyle(fontSize: 20),
@@ -188,6 +187,7 @@ class _PurchaseInfoPageState extends State<PurchaseInfoPage> {
                                 ),
                                 const SizedBox(height: 8),
                                 Container(
+                                  alignment: Alignment.topCenter,
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
@@ -214,7 +214,6 @@ class _PurchaseInfoPageState extends State<PurchaseInfoPage> {
                                       ),
                                     ],
                                   ),
-                                  alignment: Alignment.topCenter,
                                 ),
                                 const Text(
                                   "第三者に個人を特定できる情報を提供することはできません。",

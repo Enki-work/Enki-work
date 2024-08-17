@@ -2,14 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:estatjapan/model/BannerAdModel.dart';
 import 'package:estatjapan/model/ImmigrationStatisticsModel.dart';
 import 'package:estatjapan/model/RouteModel.dart';
+import 'package:estatjapan/model/jsonModel/Class.dart';
+import 'package:estatjapan/model/jsonModel/ClassOBJ.dart';
+import 'package:estatjapan/model/jsonModel/ImmigrationStatisticsRoot.dart';
+import 'package:estatjapan/model/state/AppConfigState.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 
-import '../model/jsonModel/Class.dart';
-import '../model/jsonModel/ClassOBJ.dart';
-import '../model/jsonModel/ImmigrationStatisticsRoot.dart';
-import '../model/state/AppConfigState.dart';
 import 'MenuDrawer.dart';
 
 class ImmigrationStatisticsPage extends StatefulWidget {
@@ -18,8 +18,7 @@ class ImmigrationStatisticsPage extends StatefulWidget {
   const ImmigrationStatisticsPage({Key? key, required this.title})
       : super(key: key);
   @override
-  _ImmigrationStatisticsPageState createState() =>
-      _ImmigrationStatisticsPageState();
+  State createState() => _ImmigrationStatisticsPageState();
 }
 
 class _ImmigrationStatisticsPageState extends State<ImmigrationStatisticsPage> {
@@ -37,9 +36,9 @@ class _ImmigrationStatisticsPageState extends State<ImmigrationStatisticsPage> {
 
   @override
   Widget build(BuildContext context) {
-    Dio _dio = Dio();
+    Dio dio = Dio();
     return FutureBuilder(
-        future: _dio.get(
+        future: dio.get(
             "http://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?cdTab=160&appId=${'AppConfig.shared.estatAppId'}&lang=J&statsDataId=0003423913&metaGetFlg=Y&cntGetFlg=N&explanationGetFlg=Y&annotationGetFlg=Y&sectionHeaderFlg=1&replaceSpChars=0"),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
@@ -88,10 +87,10 @@ class _ImmigrationStatisticsPageState extends State<ImmigrationStatisticsPage> {
         int index = bAdModel.isAdLoaded() ? oIndex - 1 : oIndex;
         if (oIndex == 0 && bAdModel.isAdLoaded()) {
           return Container(
-            child: AdWidget(ad: bAdModel.bannerAd()),
             width: bAdModel.bannerAd().size.width.toDouble(),
             height: 72.0,
             alignment: Alignment.center,
+            child: AdWidget(ad: bAdModel.bannerAd()),
           );
         }
         Class CLASS = obj.CLASS[index];
@@ -128,10 +127,10 @@ class _ImmigrationStatisticsPageState extends State<ImmigrationStatisticsPage> {
         int index = bAdModel.isAdLoaded() ? oIndex - 1 : oIndex;
         if (oIndex == 0 && bAdModel.isAdLoaded()) {
           return Container(
-            child: AdWidget(ad: bAdModel.bannerAd()),
             width: bAdModel.bannerAd().size.width.toDouble(),
             height: 72.0,
             alignment: Alignment.center,
+            child: AdWidget(ad: bAdModel.bannerAd()),
           );
         }
         Class CLASS = obj.CLASS[index];
@@ -168,10 +167,10 @@ class _ImmigrationStatisticsPageState extends State<ImmigrationStatisticsPage> {
         int index = bAdModel.isAdLoaded() ? oIndex - 1 : oIndex;
         if (oIndex == 0 && bAdModel.isAdLoaded()) {
           return Container(
-            child: AdWidget(ad: bAdModel.bannerAd()),
             width: bAdModel.bannerAd().size.width.toDouble(),
             height: 72.0,
             alignment: Alignment.center,
+            child: AdWidget(ad: bAdModel.bannerAd()),
           );
         }
         Class CLASS = obj.CLASS[index];

@@ -29,10 +29,7 @@ class _LineGraphDataPageState extends State<LineGraphDataPage> {
         appBar: AppBar(
           //导航栏
           title: Text(
-            widget.graphData.selectedCat03Mode!.name +
-                "の" +
-                widget.graphData.selectedCat02Mode!.name +
-                "\n全期間統計折れ線グラフ",
+            "${widget.graphData.selectedCat03Mode!.name}の${widget.graphData.selectedCat02Mode!.name}\n全期間統計折れ線グラフ",
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -97,10 +94,10 @@ class _LineGraphDataPageState extends State<LineGraphDataPage> {
         children: [
           if (bAdModel.isAdLoaded())
             Container(
-              child: AdWidget(ad: bAdModel.bannerAd()),
               width: bAdModel.bannerAd().size.width.toDouble(),
               height: 72.0,
               alignment: Alignment.center,
+              child: AdWidget(ad: bAdModel.bannerAd()),
             ),
           Padding(
             padding: const EdgeInsets.only(top: 15),

@@ -1,7 +1,6 @@
+import 'package:estatjapan/util/UIUnti.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-
-import '../util/UIUnti.dart';
 
 class ContactMePage extends StatelessWidget {
   const ContactMePage({Key? key}) : super(key: key);
@@ -53,7 +52,9 @@ class ContactMePage extends StatelessWidget {
                             'subject': '${info.appName}_V${info.version}'
                           }),
                         );
-                        launchURL(context, emailLaunchUri.toString());
+                        if (context.mounted) {
+                          launchURL(context, emailLaunchUri.toString());
+                        }
                       },
                     ),
                   ],

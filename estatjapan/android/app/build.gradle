@@ -1,3 +1,13 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def kotlin_version = "1.7.10"
+
+
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -10,10 +20,10 @@ def keystorePropertiesFile = rootProject.file("key.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
-def flutterRoot = localProperties.getProperty('flutter.sdk')
-if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
-}
+// def flutterRoot = localProperties.getProperty('flutter.sdk')
+// if (flutterRoot == null) {
+//     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+// }
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
@@ -31,12 +41,12 @@ if (flutterBuildMode == null) {
 }
 println("build.gradle flutterBuildMode ${flutterBuildMode}")
 
-apply plugin: 'com.android.application'
-// START: FlutterFire Configuration
-apply plugin: 'com.google.gms.google-services'
-// END: FlutterFire Configuration
-apply plugin: 'kotlin-android'
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+// apply plugin: 'com.android.application'
+// // START: FlutterFire Configuration
+// apply plugin: 'com.google.gms.google-services'
+// // END: FlutterFire Configuration
+// apply plugin: 'kotlin-android'
+// apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     compileSdkVersion 34
@@ -130,10 +140,10 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
-    implementation "com.android.billingclient:billing:$billingVersion"
-    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.android.billingclient:billing:5.0.0"
+    implementation "com.google.code.gson:gson:2.8.9"
 
     // ViewModel and LiveData extensions.
-    implementation "android.arch.lifecycle:extensions:$archLifecycleVersion"
+    implementation "android.arch.lifecycle:extensions:1.1.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 }

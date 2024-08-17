@@ -43,10 +43,7 @@ class _GraphDataPageState extends State<GraphDataPage> {
         appBar: AppBar(
           //导航栏
           title: Text(
-            widget.graphData.selectedCat03Mode!.name +
-                "の" +
-                widget.graphData.selectedCat02Mode!.name +
-                "\n(${widget.graphData.selectedMonth!.name})統計グラフ",
+            "${widget.graphData.selectedCat03Mode!.name}の${widget.graphData.selectedCat02Mode!.name}\n(${widget.graphData.selectedMonth!.name})統計グラフ",
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -120,10 +117,10 @@ class _GraphDataPageState extends State<GraphDataPage> {
         children: [
           if (bAdModel.isAdLoaded())
             Container(
-              child: AdWidget(ad: bAdModel.bannerAd()),
               width: bAdModel.bannerAd().size.width.toDouble(),
               height: 72.0,
               alignment: Alignment.center,
+              child: AdWidget(ad: bAdModel.bannerAd()),
             ),
           _getShowingSummaryPieChart(models, totalResult, rootModel),
           const SizedBox(
@@ -147,7 +144,7 @@ class _GraphDataPageState extends State<GraphDataPage> {
     final touchedIndex = ValueNotifier(-1);
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15),
-      color: Theme.of(context).backgroundColor,
+      color: Theme.of(context).colorScheme.background,
       child: Column(
         children: <Widget>[
           const SizedBox(
@@ -223,9 +220,11 @@ class _GraphDataPageState extends State<GraphDataPage> {
                               color: chartColors[models.indexOf(e) - 1],
                               text: e.name,
                               isSquare: true,
-                              textColor:
-                                  Theme.of(context).textTheme.caption?.color ??
-                                      const Color(0xff505050),
+                              textColor: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.color ??
+                                  const Color(0xff505050),
                             )))
                         .toList(),
                   ))),
@@ -299,7 +298,7 @@ class _GraphDataPageState extends State<GraphDataPage> {
         .toList();
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15),
-      color: Theme.of(context).backgroundColor,
+      color: Theme.of(context).colorScheme.background,
       child: Column(
         children: <Widget>[
           const SizedBox(
@@ -375,9 +374,11 @@ class _GraphDataPageState extends State<GraphDataPage> {
                               color: chartColors[models.indexOf(e) - 1],
                               text: e.name,
                               isSquare: true,
-                              textColor:
-                                  Theme.of(context).textTheme.caption?.color ??
-                                      const Color(0xff505050),
+                              textColor: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.color ??
+                                  const Color(0xff505050),
                             )))
                         .toList(),
                   ))),
@@ -434,7 +435,7 @@ class _GraphDataPageState extends State<GraphDataPage> {
         .firstWhere((element) => (element.cat01 == pModels[1].code));
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15),
-      color: Theme.of(context).backgroundColor,
+      color: Theme.of(context).colorScheme.background,
       child: Column(
         children: <Widget>[
           const SizedBox(
@@ -510,9 +511,11 @@ class _GraphDataPageState extends State<GraphDataPage> {
                               color: chartColors[models.indexOf(e) - 1],
                               text: e.name,
                               isSquare: true,
-                              textColor:
-                                  Theme.of(context).textTheme.caption?.color ??
-                                      const Color(0xff505050),
+                              textColor: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.color ??
+                                  const Color(0xff505050),
                             )))
                         .toList(),
                   ))),

@@ -1,17 +1,16 @@
 import 'dart:io';
 
 import 'package:estatjapan/model/RouteModel.dart';
+import 'package:estatjapan/model/jsonModel/ClassOBJ.dart';
+import 'package:estatjapan/model/jsonModel/ImmigrationStatisticsRoot.dart';
+import 'package:estatjapan/model/jsonModel/Value.dart';
+import 'package:estatjapan/model/state/AppConfigState.dart';
+import 'package:estatjapan/model/state_notifier/APIRepositoryNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:provider/provider.dart';
-
-import '../model/jsonModel/ClassOBJ.dart';
-import '../model/jsonModel/ImmigrationStatisticsRoot.dart';
-import '../model/jsonModel/Value.dart';
-import '../model/state/AppConfigState.dart';
-import '../model/state_notifier/APIRepositoryNotifier.dart';
 
 class DataTablePage extends StatefulWidget {
   static const double height = 56;
@@ -32,10 +31,8 @@ class _DataTablePageState extends State<DataTablePage> {
     return Scaffold(
         appBar: AppBar(
           //导航栏
-          title: Text(widget.routeModel.selectedCLASS.name +
-              "（" +
-              (widget.routeModel.selectedMonth?.name ?? "") +
-              "）"),
+          title: Text(
+              "${widget.routeModel.selectedCLASS.name}（${widget.routeModel.selectedMonth?.name ?? ""}）"),
         ),
         body: FutureBuilder(
             future: context
@@ -109,10 +106,10 @@ class _DataTablePageState extends State<DataTablePage> {
       return Column(children: [
         if (orientation == Orientation.portrait && bAdModel.isAdLoaded())
           Container(
-            child: AdWidget(ad: bAdModel.bannerAd()),
             width: bAdModel.bannerAd().size.width.toDouble(),
             height: 72.0,
             alignment: Alignment.center,
+            child: AdWidget(ad: bAdModel.bannerAd()),
           ),
         Expanded(
           child: HorizontalDataTable(
@@ -153,8 +150,10 @@ class _DataTablePageState extends State<DataTablePage> {
               height: 0.5,
               thickness: 0.0,
             ),
-            leftHandSideColBackgroundColor: Theme.of(context).backgroundColor,
-            rightHandSideColBackgroundColor: Theme.of(context).backgroundColor,
+            leftHandSideColBackgroundColor:
+                Theme.of(context).colorScheme.background,
+            rightHandSideColBackgroundColor:
+                Theme.of(context).colorScheme.background,
             verticalScrollbarStyle: ScrollbarStyle(
               thumbColor: Theme.of(context).primaryColorDark,
               isAlwaysShown: true,
@@ -202,15 +201,15 @@ class _DataTablePageState extends State<DataTablePage> {
 
   Widget _getTitleItemWidget(String label, double width) {
     return Container(
+      width: width,
+      height: DataTablePage.height,
+      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+      alignment: Alignment.center,
       child: Text(
         label,
         style: const TextStyle(fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
       ),
-      width: width,
-      height: DataTablePage.height,
-      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-      alignment: Alignment.center,
     );
   }
 
@@ -220,17 +219,21 @@ class _DataTablePageState extends State<DataTablePage> {
           .STATISTICAL_DATA.CLASS_INF.CLASS_OBJ
           .firstWhere((element) => element.id == "cat02");
       return Container(
-        child: Text(obj.CLASS[index].name),
         width: DataTablePage.width,
         height: DataTablePage.height,
         padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
         alignment: Alignment.center,
+        child: Text(obj.CLASS[index].name),
       );
     } else if (widget.routeModel.selectedCLASS.parentID == "cat02") {
       ClassOBJ obj = widget.routeModel.rootModel!.GET_STATS_DATA
           .STATISTICAL_DATA.CLASS_INF.CLASS_OBJ
           .firstWhere((element) => element.id == "cat01");
       return Container(
+        width: DataTablePage.compactWidth * 2,
+        height: DataTablePage.height,
+        padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+        alignment: Alignment.center,
         child: Flex(
           direction: Axis.horizontal,
           children: [
@@ -248,10 +251,6 @@ class _DataTablePageState extends State<DataTablePage> {
                     textAlign: TextAlign.center))
           ],
         ),
-        width: DataTablePage.compactWidth * 2,
-        height: DataTablePage.height,
-        padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-        alignment: Alignment.center,
       );
     } else {
       ClassOBJ cat01Obj = widget.routeModel.rootModel!.GET_STATS_DATA
@@ -263,6 +262,10 @@ class _DataTablePageState extends State<DataTablePage> {
       int cat01Index = index ~/ cat02Obj.CLASS.length;
       int cat02Index = (index % cat02Obj.CLASS.length).toInt();
       return Container(
+        width: DataTablePage.compactWidth * 2,
+        height: DataTablePage.height,
+        padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+        alignment: Alignment.center,
         child: Flex(
           direction: Axis.horizontal,
           children: () {
@@ -280,10 +283,6 @@ class _DataTablePageState extends State<DataTablePage> {
             ];
           }(),
         ),
-        width: DataTablePage.compactWidth * 2,
-        height: DataTablePage.height,
-        padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-        alignment: Alignment.center,
       );
     }
   }
@@ -305,11 +304,11 @@ class _DataTablePageState extends State<DataTablePage> {
               value.cat02 == cat02Code &&
               value.cat03 == element.code) {
             children.add(Container(
-              child: Text(value.value ?? ""),
               width: DataTablePage.width,
               height: DataTablePage.height,
               padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
               alignment: Alignment.center,
+              child: Text(value.value ?? ""),
             ));
             break;
           }
@@ -332,11 +331,11 @@ class _DataTablePageState extends State<DataTablePage> {
               value.cat02 == widget.routeModel.selectedCLASS.code &&
               value.cat03 == element.code) {
             children.add(Container(
-              child: Text(value.value ?? ""),
               width: DataTablePage.width,
               height: DataTablePage.height,
               padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
               alignment: Alignment.center,
+              child: Text(value.value ?? ""),
             ));
             break;
           }
@@ -360,11 +359,11 @@ class _DataTablePageState extends State<DataTablePage> {
             value.cat02 == cat02Obj.CLASS[cat02Index].code &&
             value.cat03 == widget.routeModel.selectedCLASS.code) {
           children.add(Container(
-            child: Text(value.value ?? ""),
             width: DataTablePage.width,
             height: DataTablePage.height,
             padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
             alignment: Alignment.center,
+            child: Text(value.value ?? ""),
           ));
           break;
         }

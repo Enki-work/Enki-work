@@ -64,7 +64,7 @@ class AppInitializer {
           FirebaseCrashlytics.instance.recordFlutterFatalError;
       await AppInitializer.firebaseAnalytics.logBeginCheckout();
     }
-    final fcmToken = await FirebaseMessaging.instance.getToken();
+    // final fcmToken = await FirebaseMessaging.instance.getToken();
     FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {
       // TODO: If necessary send token to application server.
       if (kDebugMode) {

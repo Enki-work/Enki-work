@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -178,31 +179,6 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
       return;
     }
   }
-  //
-  // Widget buildRestoreButton() {
-  //   if (loading) {
-  //     return Container();
-  //   }
-  //
-  //   return Padding(
-  //     padding: const EdgeInsets.all(4.0),
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.end,
-  //       children: <Widget>[
-  //         TextButton(
-  //           style: TextButton.styleFrom(
-  //             backgroundColor: Theme.of(context).primaryColor,
-  //             // TODO(darrenaustin): Migrate to new API once it lands in stable: https://github.com/flutter/flutter/issues/105724
-  //             // ignore: deprecatedmemberuse
-  //             primary: Colors.white,
-  //           ),
-  //           onPressed: () => inAppPurchase.restorePurchases(),
-  //           child: const Text('Restore purchases'),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Future<void> consume(String id) async {
     await ConsumableStore.consume(id);
@@ -345,7 +321,7 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
           changeSubscriptionParam: (oldSubscription != null)
               ? ChangeSubscriptionParam(
                   oldPurchaseDetails: oldSubscription,
-                  prorationMode: ProrationMode.immediateWithTimeProration,
+                  replacementMode: ReplacementMode.withTimeProration,
                 )
               : null);
     } else {

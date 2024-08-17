@@ -27,15 +27,12 @@ class DioHolder {
     String url =
         "http://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?appId=$estatAppId&lang=J&statsDataId=0003449073&metaGetFlg=Y&cntGetFlg=N&explanationGetFlg=Y&annotationGetFlg=Y&sectionHeaderFlg=1&replaceSpChars=0";
     if (routeModel.selectedMonth != null) {
-      url = url + "&cdTime=" + routeModel.selectedMonth!.code;
+      url = "$url&cdTime=${routeModel.selectedMonth!.code}";
     }
     final idStr = routeModel.selectedCLASS.parentID;
     if (idStr != null && idStr.isNotEmpty) {
-      url = url +
-          "&cd" +
-          idStr.replaceFirst(idStr[0], idStr[0].toUpperCase()) +
-          "=" +
-          routeModel.selectedCLASS.code;
+      url =
+          "$url&cd${idStr.replaceFirst(idStr[0], idStr[0].toUpperCase())}=${routeModel.selectedCLASS.code}";
     }
     final res = await dio.get(url);
     return ImmigrationStatisticsRoot.fromJson(res.data);
@@ -48,13 +45,13 @@ class DioHolder {
     String url =
         "http://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?appId=$estatAppId&lang=J&statsDataId=0003449073&metaGetFlg=Y&cntGetFlg=N&explanationGetFlg=Y&annotationGetFlg=Y&sectionHeaderFlg=1&replaceSpChars=0";
     if (selectedMonth != null) {
-      url = url + "&cdTime=" + selectedMonth;
+      url = "$url&cdTime=$selectedMonth";
     }
     if (selectedCat02 != null) {
-      url = url + "&cdCat02=" + selectedCat02;
+      url = "$url&cdCat02=$selectedCat02";
     }
     if (selectedCat03 != null) {
-      url = url + "&cdCat03=" + selectedCat03;
+      url = "$url&cdCat03=$selectedCat03";
     }
     final res = await dio.get(url);
     return ImmigrationStatisticsRoot.fromJson(res.data);
@@ -64,7 +61,7 @@ class DioHolder {
 class _DioInterceptor extends Interceptor {
   @override
   void onError(
-      DioError dioError, ErrorInterceptorHandler errorInterceptorHandler) {
+      DioException dioError, ErrorInterceptorHandler errorInterceptorHandler) {
     // 400系のバリデーションエラーはレポート必要なし
     final statusCode = dioError.response?.statusCode;
     if (statusCode != null && statusCode >= 500 && 600 > statusCode) {
@@ -82,7 +79,7 @@ class _DioInterceptor extends Interceptor {
 }
 
 class _ApiError extends Error {
-  final DioError _error;
+  final DioException _error;
 
   /// コンストラクタ
   _ApiError(this._error);

@@ -1,14 +1,14 @@
+import 'package:estatjapan/model/BannerAdModel.dart';
+import 'package:estatjapan/model/RouteModel.dart';
+import 'package:estatjapan/model/jsonModel/Class.dart';
+import 'package:estatjapan/model/jsonModel/ClassOBJ.dart';
+import 'package:estatjapan/model/jsonModel/ImmigrationStatisticsRoot.dart';
+import 'package:estatjapan/model/state/AppConfigState.dart';
+import 'package:estatjapan/model/state/RepositoryDataState.dart';
+import 'package:estatjapan/util/RouteFacade.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../model/BannerAdModel.dart';
-import '../model/RouteModel.dart';
-import '../model/jsonModel/Class.dart';
-import '../model/jsonModel/ClassOBJ.dart';
-import '../model/jsonModel/ImmigrationStatisticsRoot.dart';
-import '../model/state/AppConfigState.dart';
-import '../model/state/RepositoryDataState.dart';
-import '../util/RouteFacade.dart';
 import 'MonthSelectPage.dart';
 
 class ImmigrationStatisticsTypeSelectPage extends StatelessWidget {

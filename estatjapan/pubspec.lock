@@ -162,7 +162,7 @@ packages:
     source: hosted
     version: "4.10.0"
   collection:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: collection
       sha256: ee67cb0715911d28db6bf4af1026078bd6f0128b07a5f66fb2ed94ec6783c09a
@@ -553,7 +553,7 @@ packages:
     source: hosted
     version: "3.2.0"
   in_app_purchase_android:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: in_app_purchase_android
       sha256: "3d84d1a001fa138bed09e0cd95e9dbce268dce8b6f63bda7cf69cbf9135fbfbb"
@@ -569,7 +569,7 @@ packages:
     source: hosted
     version: "1.4.0"
   in_app_purchase_storekit:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: in_app_purchase_storekit
       sha256: a4b523cdad26d9c81fe1f35636b9d46c459f6c07b84a93ae5cbdd93b21670eea

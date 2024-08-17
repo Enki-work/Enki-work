@@ -1,31 +1,9 @@
-buildscript {
-    ext.kotlin_version = '1.7.10'
-    ext.billingVersion = '5.0.0'
-    ext.gsonVersion= '2.8.9'
-    ext.firebaseAuthVersion = '21.1.0'
-    ext.firebaseCoreVersion = '21.1.1'
-    ext.firebaseFunctionsVersion = '20.2.0'
-    ext.firebaseUiVersion = '8.0.1'
-    ext.archLifecycleVersion = '1.1.1'
-    ext.billing_version = '5.0.0'
-
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.google.gms:google-services:4.3.14'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.2'
-    }
-}
 
 allprojects {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {

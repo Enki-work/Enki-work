@@ -1,11 +1,11 @@
+import 'package:estatjapan/model/state/AppConfigState.dart';
+import 'package:estatjapan/model/state/PurchaseState.dart';
+import 'package:estatjapan/model/state/RepositoryDataState.dart';
+import 'package:estatjapan/model/state_notifier/APIRepositoryNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 
-import '../model/state/AppConfigState.dart';
-import '../model/state/PurchaseState.dart';
-import '../model/state/RepositoryDataState.dart';
-import '../model/state_notifier/APIRepositoryNotifier.dart';
 import 'GraphDataSelectPage.dart';
 import 'ImmigrationStatisticsTypeSelectPage.dart';
 import 'MenuDrawer.dart';
@@ -31,10 +31,10 @@ class RootPage extends StatelessWidget {
               bAdModel.isAdLoaded() &&
               !context.watch<PurchaseState>().isAdDeletedDone)
             Container(
-              child: AdWidget(ad: bAdModel.bannerAd()),
               width: double.infinity,
               height: 72.0,
               alignment: Alignment.center,
+              child: AdWidget(ad: bAdModel.bannerAd()),
             ),
           if (rootPageState.immigrationStatisticsRoot != null)
             Expanded(

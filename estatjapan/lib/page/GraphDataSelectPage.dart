@@ -1,11 +1,11 @@
 import 'package:estatjapan/model/GraphData.dart';
+import 'package:estatjapan/model/jsonModel/Class.dart';
+import 'package:estatjapan/model/jsonModel/ClassOBJ.dart';
+import 'package:estatjapan/model/state/RepositoryDataState.dart';
 import 'package:estatjapan/util/RouteFacade.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../model/jsonModel/Class.dart';
-import '../model/jsonModel/ClassOBJ.dart';
-import '../model/state/RepositoryDataState.dart';
 import 'BureauSelectPage.dart';
 import 'GraphDataPage.dart';
 import 'LineGraphDataPage.dart';
@@ -37,7 +37,9 @@ class GraphDataSelectPage extends StatelessWidget {
                         VisaTypeSelectPage(
                           obj: obj,
                         ));
-                    context.read<GraphData>().selectedCat02Mode = result;
+                    if (context.mounted) {
+                      context.read<GraphData>().selectedCat02Mode = result;
+                    }
                   },
                   child: Text(
                       context.watch<GraphData>().selectedCat02Mode == null
@@ -62,8 +64,9 @@ class GraphDataSelectPage extends StatelessWidget {
                         obj: obj,
                       ),
                     );
-
-                    context.read<GraphData>().selectedCat03Mode = result;
+                    if (context.mounted) {
+                      context.read<GraphData>().selectedCat03Mode = result;
+                    }
                   },
                   child: Text(
                       context.watch<GraphData>().selectedCat03Mode == null
@@ -108,7 +111,9 @@ class GraphDataSelectPage extends StatelessWidget {
                         pageType: MonthSelectPageType.graph,
                       ),
                     );
-                    context.read<GraphData>().selectedMonth = result;
+                    if (context.mounted) {
+                      context.read<GraphData>().selectedMonth = result;
+                    }
                   },
                   child: Text(
                       context.watch<GraphData>().selectedMonth == null

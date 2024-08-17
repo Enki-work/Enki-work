@@ -12,7 +12,7 @@ class MenuDrawer extends StatefulWidget {
     Key? key,
   }) : super(key: key);
   @override
-  _MenuDrawerState createState() => _MenuDrawerState();
+  State createState() => _MenuDrawerState();
 }
 
 class _MenuDrawerState extends State<MenuDrawer> {
@@ -30,10 +30,10 @@ class _MenuDrawerState extends State<MenuDrawer> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 38.0, bottom: 10),
+                const Padding(
+                  padding: EdgeInsets.only(top: 38.0, bottom: 10),
                   child: Row(
-                    children: const <Widget>[
+                    children: <Widget>[
                       // Padding(
                       //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       //   child: ClipOval(

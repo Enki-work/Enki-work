@@ -66,6 +66,10 @@ dependencies:
   get: 4.6.5
   pigeon: ^21.1.0
 
+  collection: ^1.18.0
+  in_app_purchase_android:
+  in_app_purchase_storekit:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -33,10 +33,10 @@ class BureauSelectPage extends StatelessWidget {
                 int index = bAdModel.isAdLoaded() ? oIndex - 1 : oIndex;
                 if (oIndex == 0 && bAdModel.isAdLoaded()) {
                   return Container(
-                    child: AdWidget(ad: bAdModel.bannerAd()),
                     width: bAdModel.bannerAd().size.width.toDouble(),
                     height: 72.0,
                     alignment: Alignment.center,
+                    child: AdWidget(ad: bAdModel.bannerAd()),
                   );
                 }
                 return ListTile(
@@ -46,9 +46,9 @@ class BureauSelectPage extends StatelessWidget {
                       case "1":
                         return model.name;
                       case "2":
-                        return " →" + model.name;
+                        return " →${model.name}";
                       case "3":
-                        return "    →" + model.name;
+                        return "    →${model.name}";
                       default:
                         return model.name;
                     }
